@@ -22,75 +22,75 @@
 static const char *TAG = "lcd_panel.ili9342";
 
 // ili9342 commands
-// All ILI9342 specific commands some are used by init()
-#define ILI9342_NOP     0x00
-#define ILI9342_SWRESET 0x01
-#define ILI9342_RDDID   0x04
-#define ILI9342_RDDST   0x09
+// All ILI9341 specific commands some are used by init()
+#define ILI9341_NOP     0x00
+#define ILI9341_SWRESET 0x01
+#define ILI9341_RDDID   0x04
+#define ILI9341_RDDST   0x09
 
-#define ILI9342_SLPIN   0x10
-#define ILI9342_SLPOUT  0x11
-#define ILI9342_PTLON   0x12
-#define ILI9342_NORON   0x13
+#define ILI9341_SLPIN   0x10
+#define ILI9341_SLPOUT  0x11
+#define ILI9341_PTLON   0x12
+#define ILI9341_NORON   0x13
 
-#define ILI9342_RDMODE  0x0A
-#define ILI9342_RDMADCTL  0x0B
-#define ILI9342_RDPIXFMT  0x0C
-#define ILI9342_RDIMGFMT  0x0A
-#define ILI9342_RDSELFDIAG  0x0F
+#define ILI9341_RDMODE  0x0A
+#define ILI9341_RDMADCTL  0x0B
+#define ILI9341_RDPIXFMT  0x0C
+#define ILI9341_RDIMGFMT  0x0A
+#define ILI9341_RDSELFDIAG  0x0F
 
-#define ILI9342_INVOFF  0x20
-#define ILI9342_INVON   0x21
-#define ILI9342_GAMMASET 0x26
-#define ILI9342_DISPOFF 0x28
-#define ILI9342_DISPON  0x29
+#define ILI9341_INVOFF  0x20
+#define ILI9341_INVON   0x21
+#define ILI9341_GAMMASET 0x26
+#define ILI9341_DISPOFF 0x28
+#define ILI9341_DISPON  0x29
 
-#define ILI9342_CASET   0x2A
-#define ILI9342_PASET   0x2B
-#define ILI9342_RAMWR   0x2C
-#define ILI9342_RAMRD   0x2E
+#define ILI9341_CASET   0x2A
+#define ILI9341_PASET   0x2B
+#define ILI9341_RAMWR   0x2C
+#define ILI9341_RAMRD   0x2E
 
-#define ILI9342_PTLAR   0x30
-#define ILI9342_VSCRDEF 0x33
-#define ILI9342_MADCTL  0x36
-#define ILI9342_VSCRSADD 0x37
-#define ILI9342_PIXFMT  0x3A
+#define ILI9341_PTLAR   0x30
+#define ILI9341_VSCRDEF 0x33
+#define ILI9341_MADCTL  0x36
+#define ILI9341_VSCRSADD 0x37
+#define ILI9341_PIXFMT  0x3A
 
-#define ILI9342_WRDISBV  0x51
-#define ILI9342_RDDISBV  0x52
-#define ILI9342_WRCTRLD  0x53
+#define ILI9341_WRDISBV  0x51
+#define ILI9341_RDDISBV  0x52
+#define ILI9341_WRCTRLD  0x53
 
-#define ILI9342_FRMCTR1 0xB1
-#define ILI9342_FRMCTR2 0xB2
-#define ILI9342_FRMCTR3 0xB3
-#define ILI9342_INVCTR  0xB4
-#define ILI9342_DFUNCTR 0xB6
+#define ILI9341_FRMCTR1 0xB1
+#define ILI9341_FRMCTR2 0xB2
+#define ILI9341_FRMCTR3 0xB3
+#define ILI9341_INVCTR  0xB4
+#define ILI9341_DFUNCTR 0xB6
 
-#define ILI9342_PWCTR1  0xC0
-#define ILI9342_PWCTR2  0xC1
-#define ILI9342_PWCTR3  0xC2
-#define ILI9342_PWCTR4  0xC3
-#define ILI9342_PWCTR5  0xC4
-#define ILI9342_VMCTR1  0xC5
-#define ILI9342_VMCTR2  0xC7
+#define ILI9341_PWCTR1  0xC0
+#define ILI9341_PWCTR2  0xC1
+#define ILI9341_PWCTR3  0xC2
+#define ILI9341_PWCTR4  0xC3
+#define ILI9341_PWCTR5  0xC4
+#define ILI9341_VMCTR1  0xC5
+#define ILI9341_VMCTR2  0xC7
 
-#define ILI9342_RDID4   0xD3
-#define ILI9342_RDINDEX 0xD9
-#define ILI9342_RDID1   0xDA
-#define ILI9342_RDID2   0xDB
-#define ILI9342_RDID3   0xDC
-#define ILI9342_RDIDX   0xDD // TBC
+#define ILI9341_RDID4   0xD3
+#define ILI9341_RDINDEX 0xD9
+#define ILI9341_RDID1   0xDA
+#define ILI9341_RDID2   0xDB
+#define ILI9341_RDID3   0xDC
+#define ILI9341_RDIDX   0xDD // TBC
 
-#define ILI9342_GMCTRP1 0xE0
-#define ILI9342_GMCTRN1 0xE1
+#define ILI9341_GMCTRP1 0xE0
+#define ILI9341_GMCTRN1 0xE1
 
-#define ILI9342_MADCTL_MY  0x80
-#define ILI9342_MADCTL_MX  0x40
-#define ILI9342_MADCTL_MV  0x20
-#define ILI9342_MADCTL_ML  0x10
-#define ILI9342_MADCTL_RGB 0x00
-#define ILI9342_MADCTL_BGR 0x08
-#define ILI9342_MADCTL_MH  0x04
+#define ILI9341_MADCTL_MY  0x80
+#define ILI9341_MADCTL_MX  0x40
+#define ILI9341_MADCTL_MV  0x20
+#define ILI9341_MADCTL_ML  0x10
+#define ILI9341_MADCTL_RGB 0x00
+#define ILI9341_MADCTL_BGR 0x08
+#define ILI9341_MADCTL_MH  0x04
 
 static esp_err_t panel_ili9342_del(esp_lcd_panel_t *panel);
 static esp_err_t panel_ili9342_reset(esp_lcd_panel_t *panel);
@@ -237,32 +237,52 @@ static esp_err_t panel_ili9342_init(esp_lcd_panel_t *panel)
     // LCD goes into sleep mode and display will be turned off after power on reset, exit sleep mode first
     // esp_lcd_panel_io_tx_param(io, LCD_CMD_SLPOUT, NULL, 0);
     // vTaskDelay(pdMS_TO_TICKS(100));
-    // esp_lcd_panel_io_tx_param(io, ILI9342_CMD_POSITIVE_GAMMA_CORRECTION,
+    // esp_lcd_panel_io_tx_param(io, ILI9341_CMD_POSITIVE_GAMMA_CORRECTION,
     //                           (uint8_t[]){0x00, 0x03, 0x09, 0x08, 0x16, 0x0A, 0x3F, 0x78, 0x4C, 0x09, 0x0A, 0x08, 0x16, 0x1A, 0x0F}, 30);
-    // esp_lcd_panel_io_tx_param(io, ILI9342_CMD_NEGATIVE_GAMMA_CORRECTION,
+    // esp_lcd_panel_io_tx_param(io, ILI9341_CMD_NEGATIVE_GAMMA_CORRECTION,
     //                           (uint8_t[]){0x00, 0x16, 0x19, 0x03, 0x0F, 0x05, 0x32, 0x45, 0x46, 0x04, 0x0E, 0x0D, 0x35, 0x37, 0x0F}, 30);
     
-    static const uint8_t params1[] = {0xFF,0x93,0x42};
-    esp_lcd_panel_io_tx_param(io,0xC8,params1,sizeof(params1));
-    static const uint8_t params2[] = {0x12,0x12};
-    esp_lcd_panel_io_tx_param(io,0xC0,params2,sizeof(params2));
-    static const uint8_t params3[] = {0x03};
-    esp_lcd_panel_io_tx_param(io,0xC1,params3,sizeof(params3));
-    static const uint8_t params4[] = {0x0E};
-    esp_lcd_panel_io_tx_param(io,0xB0,params4,sizeof(params4));
-    static const uint8_t params5[] = {0x00,0x01,0x01};
-    esp_lcd_panel_io_tx_param(io,0xF6,params5,sizeof(params5));
-    static const uint8_t params6[] = {0x80|0x20|0x08}; 
-    esp_lcd_panel_io_tx_param(io,0x36,params6,sizeof(params6));
-    esp_lcd_panel_io_tx_param(io,0x3A,&ili9342->colmod_cal ,1);
-    static const uint8_t params7[] = { 0x08,0x82,0x27 };
-    esp_lcd_panel_io_tx_param(io,0xB6,params7,sizeof(params7));
-    static const uint8_t params8[] = { 0x00,0x0C,0x11,0x04,0x11,0x08,0x37,0x89,0x4C,0x06,0x0C,0x0A,0x2E,0x34,0x0F };
-    esp_lcd_panel_io_tx_param(io,0xE0,params8,sizeof(params8));
-    static const uint8_t params9[] = { 0x00,0x0B,0x11,0x05,0x13,0x09,0x33,0x67,0x48,0x07,0x0E,0x0B,0x2E,0x33,0x0F };
-    esp_lcd_panel_io_tx_param(io,0xE1,params9,sizeof(params9));
-    static const uint8_t params10[] = {};
-    esp_lcd_panel_io_tx_param(io,0x11,params10,0);
+    static const uint8_t params1[] = {0x03,0x80,02};
+    esp_lcd_panel_io_tx_param(io,0xEF,params1,sizeof(params1));
+    static const uint8_t params2[] = {0x00,0xc1,0x30};
+    esp_lcd_panel_io_tx_param(io,0xCF,params2,sizeof(params2));
+    static const uint8_t params3[] = {0x64,0x03,0x12,0x81};
+    esp_lcd_panel_io_tx_param(io,0xED,params3,sizeof(params3));
+    static const uint8_t params4[] = {0x85,0x00,0x78};
+    esp_lcd_panel_io_tx_param(io,0xE8,params4,sizeof(params4));
+    static const uint8_t params5[] = {0x39,0x2C,0x00,0x34,0x02};
+    esp_lcd_panel_io_tx_param(io,0xCB,params5,sizeof(params5));
+    static const uint8_t params6[] = {0x20}; 
+    esp_lcd_panel_io_tx_param(io,0xF7,params6,sizeof(params6));
+    static const uint8_t params7[] = { 0x00, 0x00 };
+    esp_lcd_panel_io_tx_param(io,0xEA,params7,sizeof(params7));
+    static const uint8_t params8[] = { 0x23 };
+    esp_lcd_panel_io_tx_param(io,ILI9341_PWCTR1,params8,sizeof(params8));
+    static const uint8_t params9[] = { 0x10 };
+    esp_lcd_panel_io_tx_param(io,ILI9341_PWCTR2,params9,sizeof(params9));
+    static const uint8_t params10[] = { 0x3e, 0x28 };
+    esp_lcd_panel_io_tx_param(io,ILI9341_VMCTR1,params10,sizeof(params10));
+    static const uint8_t params11[] = { 0x86 };
+    esp_lcd_panel_io_tx_param(io,ILI9341_VMCTR2,params11,sizeof(params11));
+    static const uint8_t params12[] = { ILI9341_MADCTL_MX | ILI9341_MADCTL_BGR };
+    esp_lcd_panel_io_tx_param(io,ILI9341_MADCTL,params12,sizeof(params12));
+    uint8_t params13[1];
+    params13[0] = ili9342->colmod_cal;
+    esp_lcd_panel_io_tx_param(io,ILI9341_PIXFMT,params13,sizeof(params13));
+    static const uint8_t params14[] = {0x00,0x13};
+    esp_lcd_panel_io_tx_param(io,ILI9341_FRMCTR1,params14,sizeof(params14));
+    static const uint8_t params15[] = {0x08,0x82,0x27};
+    esp_lcd_panel_io_tx_param(io,ILI9341_DFUNCTR,params15,sizeof(params15));
+    static const uint8_t params16[] = {0x00};
+    esp_lcd_panel_io_tx_param(io,0xF2,params16,sizeof(params16));
+    static const uint8_t params17[] = {0x01};
+    esp_lcd_panel_io_tx_param(io,ILI9341_GAMMASET,params17,sizeof(params17));
+    static const uint8_t params18[] = {0x0f,0x31,0x2b,0x0c,0x0e,0x08,0x4e,0xf1,0x37,0x07,0x10,0x03,0x0e,0x09,0x00};
+    esp_lcd_panel_io_tx_param(io,ILI9341_GMCTRP1,params18,sizeof(params18));
+    static const uint8_t params19[] = {0x00,0x0e,0x14,0x03,0x11,0x07,0x31,0xc1,0x48,0x08,0x0f,0x0c,0x31,0x36,0x0f};
+    esp_lcd_panel_io_tx_param(io,ILI9341_GMCTRN1,params19,sizeof(params19));
+    static const uint8_t params20[] = {};
+    esp_lcd_panel_io_tx_param(io,ILI9341_SLPOUT,params20,0);
     vTaskDelay(pdMS_TO_TICKS(120));
     return ESP_OK;
 }
@@ -345,11 +365,11 @@ static esp_err_t panel_ili9342_swap_xy(esp_lcd_panel_t *panel, bool swap_axes)
     esp_lcd_panel_io_handle_t io = ili9342->io;
     if (swap_axes)
     {
-        ili9342->madctl_val |= ~LCD_CMD_MV_BIT;
+        ili9342->madctl_val |= LCD_CMD_MV_BIT;
     }
     else
     {
-        ili9342->madctl_val &= LCD_CMD_MV_BIT;
+        ili9342->madctl_val &= ~LCD_CMD_MV_BIT;
     }
     esp_lcd_panel_io_tx_param(io, LCD_CMD_MADCTL, &ili9342->madctl_val, 1);
 
