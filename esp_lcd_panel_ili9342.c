@@ -311,7 +311,7 @@ static esp_err_t panel_ili9342_draw_bitmap(esp_lcd_panel_t *panel, int x_start, 
     esp_lcd_panel_io_tx_param(io, 0x2B, data2, 4);
     
     // transfer frame buffer
-    size_t len = (x_end - x_start) * (y_end - y_start) * ili9342->bits_per_pixel / 8;
+    size_t len = (x_end - x_start) * (y_end - y_start) * ((ili9342->bits_per_pixel==18)?3:ili9342->bits_per_pixel / 8);
     esp_lcd_panel_io_tx_color(io, 0x2C, color_data, len);
 
     return ESP_OK;
