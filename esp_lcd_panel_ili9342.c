@@ -390,6 +390,9 @@ static esp_err_t panel_ili9342_disp_on_off(esp_lcd_panel_t *panel, bool on_off)
     ili9342_panel_t *ili9342 = __containerof(panel, ili9342_panel_t, base);
     esp_lcd_panel_io_handle_t io = ili9342->io;
     int command = 0;
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
+    on_off=!on_off;
+#endif
     if (on_off)
     {
         command = LCD_CMD_DISPON;
@@ -398,6 +401,7 @@ static esp_err_t panel_ili9342_disp_on_off(esp_lcd_panel_t *panel, bool on_off)
     {
         command = LCD_CMD_DISPOFF;
     }
+
     esp_lcd_panel_io_tx_param(io, command , NULL, 0);
     // SEG/COM will be ON/OFF after 100ms after sending DISP_ON/OFF command
     vTaskDelay(pdMS_TO_TICKS(100));
